@@ -1,11 +1,9 @@
-// ignore_for_file: unused_import
-
 import 'package:flutter/material.dart';
+import 'package:flutter_thai_hotline_app/views/about_ui.dart';
 import 'package:flutter_thai_hotline_app/views/bank_ui.dart';
 import 'package:flutter_thai_hotline_app/views/emg_ui.dart';
 import 'package:flutter_thai_hotline_app/views/pub_ui.dart';
 import 'package:flutter_thai_hotline_app/views/travel_ui.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeUI extends StatefulWidget {
   const HomeUI({super.key});
@@ -36,6 +34,19 @@ class _HomeUIState extends State<HomeUI> {
           ),
         ),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline, color: Colors.white),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AboutUi(),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (value) {
@@ -44,7 +55,7 @@ class _HomeUIState extends State<HomeUI> {
           });
         },
         currentIndex: selectedIndex,
-        selectedItemColor: Colors.deepOrange[700],
+        selectedItemColor: Colors.blue,
         items: [
           BottomNavigationBarItem(
             icon: Image.asset(

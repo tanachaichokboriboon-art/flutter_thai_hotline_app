@@ -1,4 +1,7 @@
+// ignore_for_file: unused_element
+
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TravelUI extends StatefulWidget {
   const TravelUI({super.key});
@@ -17,8 +20,14 @@ class _TravelUIState extends State<TravelUI> {
     _TravelContact('บขส.', '1490', 'assets/images/travel_6.png'),
     _TravelContact('เส้นทางบนทางด่วน', '1543', 'assets/images/travel_7.png'),
     _TravelContact('กรมทางหลวง', '1586', 'assets/images/travel_8.png'),
-    _TravelContact('การรถไฟแห่งประเทศไทย', '1690', 'assets/images/travel_9.png'),
+    _TravelContact(
+        'การรถไฟแห่งประเทศไทย', '1690', 'assets/images/travel_9.png'),
   ];
+  //ทำให้โทรได้
+  Future<void> _makePhoneCall(String phoneNumber) async {
+    final launchUri = Uri(scheme: 'tel', path: phoneNumber);
+    await launchUrl(launchUri);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +63,7 @@ class _TravelUIState extends State<TravelUI> {
                   vertical: 8,
                 ),
                 itemCount: _contacts.length,
-                separatorBuilder: (context, index) =>
-                    SizedBox(height: 12),
+                separatorBuilder: (context, index) => SizedBox(height: 12),
                 itemBuilder: (context, index) {
                   final contact = _contacts[index];
                   return Container(
@@ -93,7 +101,10 @@ class _TravelUIState extends State<TravelUI> {
                             ],
                           ),
                         ),
-                        Icon(Icons.phone, color: Colors.blue),
+                        IconButton(
+                          icon: Icon(Icons.phone, color: Colors.blue),
+                          onPressed: () => _makePhoneCall(contact.phone),
+                        ),
                       ],
                     ),
                   );

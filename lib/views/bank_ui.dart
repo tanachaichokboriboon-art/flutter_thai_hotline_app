@@ -1,4 +1,7 @@
+// ignore_for_file: unused_element
+
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BankUI extends StatefulWidget {
   const BankUI({super.key});
@@ -26,6 +29,11 @@ class _BankUIState extends State<BankUI> {
     _BankContact('ธนาคารอิสลาม แห่งประเทศไทย', '02-204-2766', 'assets/images/bank_15.png'),
     _BankContact('ธนาคารซีไอเอ็มบีไทย', '02-626-7777', 'assets/images/bank_16.png'),
   ];
+  //ทำให้โทรได้
+  Future<void> _makePhoneCall(String phoneNumber) async {
+    final launchUri = Uri(scheme: 'tel', path: phoneNumber);
+    await launchUrl(launchUri);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +107,10 @@ class _BankUIState extends State<BankUI> {
                             ],
                           ),
                         ),
-                        Icon(Icons.phone, color: Colors.blue),
+                        IconButton(
+                          icon: Icon(Icons.phone, color: Colors.blue),
+                          onPressed: () => _makePhoneCall(contact.phone),
+                        ),
                       ],
                     ),
                   );

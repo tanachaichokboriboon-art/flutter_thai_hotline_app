@@ -1,4 +1,7 @@
+// ignore_for_file: unused_element
+
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EmgUI extends StatefulWidget {
   const EmgUI({super.key});
@@ -19,6 +22,11 @@ class _EmgUIState extends State<EmgUI> {
     _EmgContact('ศูนย์เอราวัณ', '1646', 'assets/images/emg_8.png'),
     _EmgContact('เจ็บป่วยฉุกเฉิน', '1669', 'assets/images/emg_9.png'),
   ];
+  //ทำให้โทรได้
+  Future<void> _makePhoneCall(String phoneNumber) async {
+    final launchUri = Uri(scheme: 'tel', path: phoneNumber);
+    await launchUrl(launchUri);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +101,10 @@ class _EmgUIState extends State<EmgUI> {
                             ],
                           ),
                         ),
-                        Icon(Icons.phone, color: Colors.blue),
+                        IconButton(
+                          icon: Icon(Icons.phone, color: Colors.blue),
+                          onPressed: () => _makePhoneCall(contact.phone),
+                        ),
                       ],
                     ),
                   );

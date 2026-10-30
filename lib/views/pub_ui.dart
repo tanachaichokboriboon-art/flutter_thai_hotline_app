@@ -1,4 +1,7 @@
+// ignore_for_file: unused_element
+
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PubUI extends StatefulWidget {
   const PubUI({super.key});
@@ -19,6 +22,11 @@ class _PubUIState extends State<PubUI> {
     _PubContact('AIS', '1175', 'assets/images/pub_8.png'),
     _PubContact('TOT', '1100', 'assets/images/pub_9.png'),
   ];
+  //ทำให้โทรได้
+  Future<void> _makePhoneCall(String phoneNumber) async {
+    final launchUri = Uri(scheme: 'tel', path: phoneNumber);
+    await launchUrl(launchUri);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +100,10 @@ class _PubUIState extends State<PubUI> {
                             ],
                           ),
                         ),
-                        Icon(Icons.phone, color: Colors.blue),
+                        IconButton(
+                          icon: Icon(Icons.phone, color: Colors.blue),
+                          onPressed: () => _makePhoneCall(contact.phone),
+                        ),
                       ],
                     ),
                   );
